@@ -1,4 +1,3 @@
-
 import csv
 from ._base import TimetableExporter
 from ..class_ import RegisteredClass

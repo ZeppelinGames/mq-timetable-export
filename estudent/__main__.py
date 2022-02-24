@@ -1,5 +1,7 @@
 
 import sys
+import pyppeteer
+import asyncio
 
 if __package__ is None and not hasattr(sys, 'frozen'):
     # direct call of __main__.py
@@ -7,7 +9,7 @@ if __package__ is None and not hasattr(sys, 'frozen'):
     path = op.realpath(op.abspath(__file__))
     sys.path.insert(0, op.dirname(op.dirname(path)))
 
-def main():
+async def main():
     import argparse
     from getpass import getpass
 
@@ -36,10 +38,11 @@ def main():
 
     exporter_name = args.format
     exporter = exporters_reg[exporter_name]()
+    b = await pyppeteer.launch(headless=True)
 
-    client = estudent.Client()
-    client.login(username, password)
-    my_classes_page = client.fetch_my_classes_page()
+    client = estudent.Client(b)
+    await client.login(username, password)
+    my_classes_page = await client.fetch_my_classes_page()
     timetable_resources = my_classes_page.timetable()
     study_period = timetable_resources.study_period()
 
@@ -51,4 +54,6 @@ def main():
             exporter.dump(study_period, fh)
 
 if __name__ == '__main__':
-    main()
+    loop = asyncio.new_event_loop()
+    loop.run_until_complete(main())
+    #main()

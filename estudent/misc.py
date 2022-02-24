@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup, SoupStrainer
 
 HTML_PARSER = 'html.parser'
 TZ = 'Australia/Sydney'
-LOGIN_URL = 'https://mq-edu-web.t1cloud.com/T1SMDefault/WebApps/eStudent/login.aspx'
+LOGIN_URL = 'https://student1.mq.edu.au/T1SMPROD/WebApps/eStudent'
 TIMETABLE_URL = 'https://mq-edu-web.t1cloud.com/T1SMDefault/WebApps/eStudent/SM/StudentTtable10.aspx?r=MQ.ESTU.UGSTUDNTB&f=MQ.EST.TIMETBL.WEB'
 
 ClassFlags = IntFlag('ClassFlags', 'registered swappable stream')
